@@ -20,7 +20,8 @@ public class HighlightView implements HighLight {
     /**
      * 高亮相对view的padding
      */
-    private int padding;
+    private int paddingLR;
+    private int paddingTB;
     private HighlightOptions options;
     private RectF rectF;
 
@@ -28,7 +29,16 @@ public class HighlightView implements HighLight {
         this.mHole = mHole;
         this.shape = shape;
         this.round = round;
-        this.padding = padding;
+        this.paddingLR = padding;
+        this.paddingTB = padding;
+    }
+
+    public HighlightView(View mHole, Shape shape, int round, int paddingLR, int paddingTB) {
+        this.mHole = mHole;
+        this.shape = shape;
+        this.round = round;
+        this.paddingLR = paddingLR;
+        this.paddingTB = paddingTB;
     }
 
     public void setOptions(HighlightOptions options) {
@@ -55,7 +65,13 @@ public class HighlightView implements HighLight {
         if (mHole == null) {
             throw new IllegalArgumentException("the highlight view is null!");
         }
-        return Math.max(mHole.getWidth() / 2, mHole.getHeight() / 2) + padding;
+        int max = Math.max(mHole.getWidth() / 2, mHole.getHeight() / 2);
+        if(max==mHole.getWidth() / 2){
+            return Math.max(mHole.getWidth() / 2, mHole.getHeight() / 2) + paddingLR;
+        }
+        else {
+            return Math.max(mHole.getWidth() / 2, mHole.getHeight() / 2) + paddingTB;
+        }
     }
 
     @Override
@@ -75,10 +91,10 @@ public class HighlightView implements HighLight {
     private RectF fetchLocation(View target) {
         RectF location = new RectF();
         Rect locationInView = ViewUtils.getLocationInView(target, mHole);
-        location.left = locationInView.left - padding;
-        location.top = locationInView.top - padding;
-        location.right = locationInView.right + padding;
-        location.bottom = locationInView.bottom + padding;
+        location.left = locationInView.left - paddingLR;
+        location.top = locationInView.top - paddingTB;
+        location.right = locationInView.right + paddingLR;
+        location.bottom = locationInView.bottom + paddingTB;
         return location;
     }
 

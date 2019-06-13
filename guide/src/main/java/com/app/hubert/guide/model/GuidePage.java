@@ -127,7 +127,12 @@ public class GuidePage {
     }
 
     public GuidePage addHighLightWithOptions(View view, HighLight.Shape shape, int round, int padding, HighlightOptions options) {
-        HighlightView highlight = new HighlightView(view, shape, round, padding);
+        addHighLightWithOptions(view, shape, round, padding, padding, options);
+        return this;
+    }
+
+    public GuidePage addHighLightWithOptions(View view, HighLight.Shape shape, int round, int paddingLR, int paddingTB, HighlightOptions options) {
+        HighlightView highlight = new HighlightView(view, shape, round, paddingLR, paddingTB);
         if (options != null) {
             if (options.relativeGuide != null) {
                 options.relativeGuide.highLight = highlight;
