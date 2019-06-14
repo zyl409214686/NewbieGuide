@@ -3,7 +3,6 @@ package com.app.hubert.guide.model;
 import android.graphics.RectF;
 import android.support.annotation.IntDef;
 import android.support.annotation.LayoutRes;
-import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -14,14 +13,18 @@ import com.app.hubert.guide.util.LogUtil;
 
 import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;
-
+import com.app.hubert.guide.constant.Gravity;
 /**
  * Created by hubert on 2018/6/28.
  */
 public class RelativeGuide {
 
-    @IntDef({android.view.Gravity.LEFT, android.view.Gravity.TOP,
-            android.view.Gravity.RIGHT, android.view.Gravity.BOTTOM})
+
+    @IntDef({Gravity.LEFT, Gravity.TOP,
+            Gravity.RIGHT, Gravity.BOTTOM})
+//    ,
+//    Gravity.LEFT_BOTTOM, Gravity.LEFT_TOP,
+//    Gravity.RIGHT_TOP, Gravity.RIGHT_BOTTOM
     @Retention(RetentionPolicy.SOURCE)
     @interface LimitGravity {
 
@@ -97,7 +100,7 @@ public class RelativeGuide {
             case Gravity.TOP:
                 marginInfo.gravity = Gravity.BOTTOM;
                 marginInfo.bottomMargin = (int) (viewGroup.getHeight() - rectF.top + padding);
-                marginInfo.leftMargin = (int) rectF.left;
+//                marginInfo.leftMargin = (int) rectF.left;
                 break;
             case Gravity.RIGHT:
                 marginInfo.leftMargin = (int) (rectF.right + padding);
@@ -105,8 +108,9 @@ public class RelativeGuide {
                 break;
             case Gravity.BOTTOM:
                 marginInfo.topMargin = (int) (rectF.bottom + padding);
-                marginInfo.leftMargin = (int) rectF.left;
+//                marginInfo.leftMargin = (int) rectF.left;
                 break;
+
         }
         return marginInfo;
     }
